@@ -1,19 +1,23 @@
 package mingsin.androidkotlinexample
 
+import android.app.ProgressDialog
 import android.databinding.DataBindingUtil
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.CompositeSubscription
+import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
-    lateinit var apiService: ApiService
+class MainActivity : DaggerActivity() {
+    @Inject lateinit var apiService: ApiService
+    @Inject lateinit var cm: ConnectivityManager
+    @Inject lateinit var progressDialog: ProgressDialog
 
     private val subscriptions = CompositeSubscription()
 
@@ -32,16 +36,30 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
-        apiService = RestClient().createApi()
+        Logger.d(cm)
     }
 
+    override fun onInject() {
+        component?.inject(this)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        progressDialog.show()
+    }
 
     override fun onStart() {
         super.onStart()
         subscriptions.add(apiService.ip().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    Logger.d(it)
+                .subscribe({
+                    ip ->
+                    Logger.d("get result ${ip}")
+                    progressDialog.hide()
+                }) { error ->
+                    Logger.e(error, "Aha.. got error message")
+                    progressDialog.hide()
                 })
     }
 
@@ -49,4 +67,5 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         subscriptions.clear()
     }
+
 }
