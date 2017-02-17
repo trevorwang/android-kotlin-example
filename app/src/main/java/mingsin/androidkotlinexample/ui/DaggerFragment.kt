@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.ui
 
 import android.content.Context
 import android.os.Bundle

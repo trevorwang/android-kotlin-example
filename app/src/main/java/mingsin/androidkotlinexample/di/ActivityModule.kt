@@ -3,7 +3,7 @@ package mingsin.androidkotlinexample.di
 import android.app.ProgressDialog
 import dagger.Module
 import dagger.Provides
-import mingsin.androidkotlinexample.DaggerActivity
+import mingsin.androidkotlinexample.ui.DaggerActivity
 import mingsin.androidkotlinexample.R
 
 /**

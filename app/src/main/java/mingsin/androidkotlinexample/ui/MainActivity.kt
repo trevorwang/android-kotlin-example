@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.ui
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
+import mingsin.androidkotlinexample.data.ApiService
+import mingsin.androidkotlinexample.R
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

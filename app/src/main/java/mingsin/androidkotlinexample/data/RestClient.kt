@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.data
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory

@@ -2,7 +2,7 @@ package mingsin.androidkotlinexample.di
 
 import android.net.ConnectivityManager
 import dagger.Component
-import mingsin.androidkotlinexample.ApiService
+import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.App
 import javax.inject.Singleton
 
