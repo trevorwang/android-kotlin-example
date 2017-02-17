@@ -4,9 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
-import mingsin.androidkotlinexample.ApiService
+import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.App
-import mingsin.androidkotlinexample.RestClient
+import mingsin.androidkotlinexample.data.RestClient
 import javax.inject.Singleton
 
 /**

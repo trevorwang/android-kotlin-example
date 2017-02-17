@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/hello"
-        android:name="mingsin.androidkotlinexample.ExampleFragment"
+        android:name="mingsin.androidkotlinexample.ui.ExampleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

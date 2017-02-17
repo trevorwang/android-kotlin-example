@@ -1,7 +1,7 @@
 package mingsin.androidkotlinexample.di
 
 import dagger.Component
-import mingsin.androidkotlinexample.ExampleFragment
+import mingsin.androidkotlinexample.ui.ExampleFragment
 
 /**
  * Created by wangta on 2/17/17.

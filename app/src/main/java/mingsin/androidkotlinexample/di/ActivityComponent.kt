@@ -2,9 +2,9 @@ package mingsin.androidkotlinexample.di
 
 import android.app.ProgressDialog
 import dagger.Component
-import mingsin.androidkotlinexample.ApiService
-import mingsin.androidkotlinexample.MainActivity
-import mingsin.androidkotlinexample.WithFragmentActivity
+import mingsin.androidkotlinexample.data.ApiService
+import mingsin.androidkotlinexample.ui.MainActivity
+import mingsin.androidkotlinexample.ui.WithFragmentActivity
 
 /**
  * Created by wangta on 2/16/17.

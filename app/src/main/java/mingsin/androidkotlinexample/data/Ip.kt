@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.data
 
 /**
  * Created by wangta on 2/16/17.

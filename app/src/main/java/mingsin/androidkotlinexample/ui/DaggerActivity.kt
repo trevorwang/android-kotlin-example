@@ -1,7 +1,8 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import mingsin.androidkotlinexample.App
 import mingsin.androidkotlinexample.di.ActivityComponent
 import mingsin.androidkotlinexample.di.ActivityModule
 import mingsin.androidkotlinexample.di.DaggerActivityComponent

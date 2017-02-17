@@ -1,6 +1,7 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.ui
 
 import android.os.Bundle
+import mingsin.androidkotlinexample.R
 
 /**
  * Created by wangta on 2/17/17.

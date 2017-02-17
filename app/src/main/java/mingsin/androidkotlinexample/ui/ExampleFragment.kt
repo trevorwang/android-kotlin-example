@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.androidkotlinexample.ui
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.orhanobut.logger.Logger
+import mingsin.androidkotlinexample.data.ApiService
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
