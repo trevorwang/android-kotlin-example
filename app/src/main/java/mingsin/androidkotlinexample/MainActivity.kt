@@ -1,11 +1,11 @@
 package mingsin.androidkotlinexample
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
@@ -33,8 +33,8 @@ class MainActivity : DaggerActivity() {
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val intent = Intent(this, WithFragmentActivity::class.java)
+            startActivity(intent)
         }
         Logger.d(cm)
     }
