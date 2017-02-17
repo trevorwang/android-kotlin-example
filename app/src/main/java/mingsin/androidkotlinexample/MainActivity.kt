@@ -55,7 +55,7 @@ class MainActivity : DaggerActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     ip ->
-                    Logger.d("get result ${ip}")
+                    Logger.d("get result $ip")
                     progressDialog.hide()
                 }) { error ->
                     Logger.e(error, "Aha.. got error message")
