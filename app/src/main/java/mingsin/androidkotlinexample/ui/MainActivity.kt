@@ -8,8 +8,8 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
-import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.R
+import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -34,7 +34,7 @@ class MainActivity : DaggerActivity() {
         setSupportActionBar(toolbar)
 
         val fab = findViewById(R.id.fab) as FloatingActionButton
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
             val intent = Intent(this, WithFragmentActivity::class.java)
             startActivity(intent)
         }
