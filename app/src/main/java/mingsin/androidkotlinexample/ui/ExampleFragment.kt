@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
- * Created by wangta on 2/17/17.
+ * Created by Trevor Wang on 2/17/17.
  */
 class ExampleFragment : DaggerFragment() {
     @Inject lateinit var apiService: ApiService

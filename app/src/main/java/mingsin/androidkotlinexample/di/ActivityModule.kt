@@ -7,7 +7,7 @@ import mingsin.androidkotlinexample.ui.DaggerActivity
 import mingsin.androidkotlinexample.R
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 @Module
 class ActivityModule(val activity: DaggerActivity) {

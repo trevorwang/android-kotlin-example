@@ -4,7 +4,7 @@ import dagger.Component
 import mingsin.androidkotlinexample.ui.ExampleFragment
 
 /**
- * Created by wangta on 2/17/17.
+ * Created by Trevor Wang on 2/17/17.
  */
 @ForFragment
 @Component(modules = arrayOf(FragmentModule::class),

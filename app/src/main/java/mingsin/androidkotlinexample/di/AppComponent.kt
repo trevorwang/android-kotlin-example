@@ -7,7 +7,7 @@ import mingsin.androidkotlinexample.App
 import javax.inject.Singleton
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 @Singleton
 @Component(

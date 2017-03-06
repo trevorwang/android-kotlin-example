@@ -8,7 +8,7 @@ import mingsin.androidkotlinexample.di.ActivityModule
 import mingsin.androidkotlinexample.di.DaggerActivityComponent
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 abstract class DaggerActivity : AppCompatActivity() {
     var component: ActivityComponent? = null

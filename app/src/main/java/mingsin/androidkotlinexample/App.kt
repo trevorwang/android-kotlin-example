@@ -9,7 +9,7 @@ import mingsin.androidkotlinexample.di.DaggerAppComponent
 import javax.inject.Inject
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 class App : Application() {
     lateinit var component: AppComponent

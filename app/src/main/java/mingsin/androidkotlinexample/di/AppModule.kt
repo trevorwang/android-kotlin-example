@@ -10,7 +10,7 @@ import mingsin.androidkotlinexample.data.RestClient
 import javax.inject.Singleton
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 @Module
 class AppModule(val app: App) {

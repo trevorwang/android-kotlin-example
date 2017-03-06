@@ -4,7 +4,7 @@ import android.os.Bundle
 import mingsin.androidkotlinexample.R
 
 /**
- * Created by wangta on 2/17/17.
+ * Created by Trevor Wang on 2/17/17.
  */
 class WithFragmentActivity : DaggerActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

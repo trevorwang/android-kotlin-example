@@ -7,7 +7,7 @@ import mingsin.androidkotlinexample.ui.MainActivity
 import mingsin.androidkotlinexample.ui.WithFragmentActivity
 
 /**
- * Created by wangta on 2/16/17.
+ * Created by Trevor Wang on 2/16/17.
  */
 @ForActivity
 @Component(
