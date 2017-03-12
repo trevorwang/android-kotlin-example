@@ -46,6 +46,7 @@ dependencies {
 
     kapt 'com.google.dagger:dagger-compiler:2.9'
     compile 'com.google.dagger:dagger:2.9'
+    testCompile 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
