@@ -22,7 +22,7 @@ class ExampleFragment : DaggerFragment() {
         component?.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val textView = TextView(context)
         textView.text = "Hello fragment!!!!"
         return textView
