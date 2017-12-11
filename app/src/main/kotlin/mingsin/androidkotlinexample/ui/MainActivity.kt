@@ -30,10 +30,10 @@ class MainActivity : DaggerActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         binding.greating = "Hello Kotlin Data Binding!!!"
 
-        val toolbar = findViewById(R.id.toolbar) as Toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab = findViewById(R.id.fab) as FloatingActionButton
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this, WithFragmentActivity::class.java)
             startActivity(intent)

@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "mingsin.androidkotlinexample"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,8 +32,8 @@ kapt {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
+    compile "com.android.support:support-core-utils:27.0.2"
+    compile 'com.android.support:design:27.0.2'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "com.android.databinding:compiler:$gradle_version"
 
