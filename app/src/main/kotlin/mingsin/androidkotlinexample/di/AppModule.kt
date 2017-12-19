@@ -4,10 +4,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
-import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.App
+import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.data.RestClient
 import javax.inject.Singleton
+
 
 /**
  * Created by Trevor Wang on 2/16/17.
@@ -30,8 +31,7 @@ class AppModule(val app: App) {
     @Provides
     @Singleton
     fun connectivity(): ConnectivityManager {
-        val service = app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return service
+        return app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
     @Provides

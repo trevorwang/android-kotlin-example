@@ -1,6 +1,6 @@
 package mingsin.androidkotlinexample.ui
 
-import android.app.ProgressDialog
+
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.ConnectivityManager
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
+import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -16,10 +17,9 @@ import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
 import javax.inject.Inject
 
-class MainActivity : DaggerActivity() {
+class MainActivity : DaggerAppCompatActivity() {
     @Inject lateinit var apiService: ApiService
     @Inject lateinit var cm: ConnectivityManager
-    @Inject lateinit var progressDialog: ProgressDialog
 
     private val subscriptions = CompositeDisposable()
 
@@ -41,16 +41,6 @@ class MainActivity : DaggerActivity() {
         Logger.d(cm)
     }
 
-    override fun onInject() {
-        component?.inject(this)
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        progressDialog.show()
-    }
-
     override fun onStart() {
         super.onStart()
         subscriptions.add(apiService.ip().subscribeOn(Schedulers.io())
@@ -60,7 +50,6 @@ class MainActivity : DaggerActivity() {
                 }, { error ->
                     Logger.e(error, "Aha.. got error message")
                 }) {
-                    progressDialog.dismiss()
                 })
     }
 

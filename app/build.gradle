@@ -45,6 +45,8 @@ dependencies {
     compile 'com.orhanobut:logger:2.1.1'
 
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     compile "com.google.dagger:dagger:$dagger_version"
+    compile "com.google.dagger:dagger-android-support:$dagger_version"
     testCompile 'junit:junit:4.12'
 }

@@ -1,8 +1,8 @@
 package mingsin.androidkotlinexample.di
 
-import android.net.ConnectivityManager
 import dagger.Component
-import mingsin.androidkotlinexample.data.ApiService
+import dagger.android.AndroidInjector
+import dagger.android.support.AndroidSupportInjectionModule
 import mingsin.androidkotlinexample.App
 import javax.inject.Singleton
 
@@ -11,11 +11,8 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(
-        modules = arrayOf(AppModule::class)
+        modules = [AndroidSupportInjectionModule::class, AppModule::class, InjectorBuilderModule::class]
 )
-interface AppComponent {
-    fun inject(app: App)
+interface AppComponent : AndroidInjector<App> {
 
-    fun connectivity(): ConnectivityManager
-    fun api(): ApiService
 }

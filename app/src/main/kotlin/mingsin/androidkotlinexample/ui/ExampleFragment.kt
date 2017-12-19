@@ -1,12 +1,12 @@
 package mingsin.androidkotlinexample.ui
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.orhanobut.logger.Logger
+import dagger.android.support.DaggerFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import mingsin.androidkotlinexample.data.ApiService
@@ -17,10 +17,6 @@ import javax.inject.Inject
  */
 class ExampleFragment : DaggerFragment() {
     @Inject lateinit var apiService: ApiService
-    @Inject lateinit var progressDialog: ProgressDialog
-    override fun onInject() {
-        component?.inject(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val textView = TextView(context)
@@ -31,12 +27,10 @@ class ExampleFragment : DaggerFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        progressDialog.show()
         apiService.ip().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Logger.d(it)
                 }, {}) {
-                    progressDialog.dismiss()
                 }
     }
 }
