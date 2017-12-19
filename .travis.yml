@@ -3,5 +3,12 @@ android:
   components:
     - tools
     - platform-tools
+    - tools
+
     - build-tools-27.0.2
     - android-27
+
+  licenses:
+    - 'android-sdk-license-.+'
+    - 'android-sdk-preview-.+'
+    - 'google-gdk-license-.+'
