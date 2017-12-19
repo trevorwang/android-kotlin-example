@@ -1,7 +1,7 @@
 package mingsin.androidkotlinexample.data
 
+import io.reactivex.Observable
 import retrofit2.http.GET
-import rx.Observable
 
 /**
  * Created by Trevor Wang on 2/16/17.

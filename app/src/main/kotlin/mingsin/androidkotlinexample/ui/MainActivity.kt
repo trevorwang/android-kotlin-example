@@ -8,12 +8,12 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.Toolbar
 import com.orhanobut.logger.Logger
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import mingsin.androidkotlinexample.R
 import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
-import rx.subscriptions.CompositeSubscription
 import javax.inject.Inject
 
 class MainActivity : DaggerActivity() {
@@ -21,7 +21,7 @@ class MainActivity : DaggerActivity() {
     @Inject lateinit var cm: ConnectivityManager
     @Inject lateinit var progressDialog: ProgressDialog
 
-    private val subscriptions = CompositeSubscription()
+    private val subscriptions = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +55,12 @@ class MainActivity : DaggerActivity() {
         super.onStart()
         subscriptions.add(apiService.ip().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    ip ->
+                .subscribe({ ip ->
                     Logger.d("get result $ip")
-                    progressDialog.hide()
-                }) { error ->
+                }, { error ->
                     Logger.e(error, "Aha.. got error message")
-                    progressDialog.hide()
+                }) {
+                    progressDialog.dismiss()
                 })
     }
 

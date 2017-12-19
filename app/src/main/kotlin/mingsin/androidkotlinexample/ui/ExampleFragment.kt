@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.orhanobut.logger.Logger
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import mingsin.androidkotlinexample.data.ApiService
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -33,8 +33,10 @@ class ExampleFragment : DaggerFragment() {
 
         progressDialog.show()
         apiService.ip().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
+                .subscribe({
                     Logger.d(it)
+                }, {}) {
+                    progressDialog.dismiss()
                 }
     }
 }

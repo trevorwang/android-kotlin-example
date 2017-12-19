@@ -1,7 +1,7 @@
 package mingsin.androidkotlinexample.data
 
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -9,12 +9,12 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 
 class RestClient {
-    val BASE_URL = "http://httpbin.org"
+    private val baseUrl = "http://httpbin.org"
 
     fun createApi(): ApiService {
         val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(baseUrl)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         return retrofit.create(ApiService::class.java)
