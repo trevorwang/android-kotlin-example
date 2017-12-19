@@ -27,9 +27,6 @@ android {
         enabled = true
     }
 }
-kapt {
-    generateStubs = true
-}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -50,4 +47,7 @@ dependencies {
     compile "com.google.dagger:dagger:$dagger_version"
     compile "com.google.dagger:dagger-android-support:$dagger_version"
     testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestCompile 'com.android.support:support-annotations:27.0.2'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
 }
