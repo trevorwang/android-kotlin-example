@@ -15,11 +15,13 @@ import io.reactivex.schedulers.Schedulers
 import mingsin.androidkotlinexample.R
 import mingsin.androidkotlinexample.data.ApiService
 import mingsin.androidkotlinexample.databinding.ActivityMainBinding
+import mingsin.androidkotlinexample.viewmodel.MainViewModel
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
     @Inject lateinit var apiService: ApiService
     @Inject lateinit var cm: ConnectivityManager
+    @Inject lateinit var viewModel: MainViewModel
 
     private val subscriptions = CompositeDisposable()
 
@@ -39,18 +41,18 @@ class MainActivity : DaggerAppCompatActivity() {
             startActivity(intent)
         }
         Logger.d(cm)
+        viewModel.sayHello()
     }
 
     override fun onStart() {
         super.onStart()
         subscriptions.add(apiService.ip().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ ip ->
-                    Logger.d("get result $ip")
-                }, { error ->
-                    Logger.e(error, "Aha.. got error message")
-                }) {
-                })
+                .subscribe({
+                    Logger.d("get result $it")
+                }, {
+                    Logger.e(it, "Aha.. got error message")
+                }))
     }
 
     override fun onStop() {
