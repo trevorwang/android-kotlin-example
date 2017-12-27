@@ -39,6 +39,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:support-core-utils:$support_libs_version"
     implementation "com.android.support:design:$support_libs_version"
+    implementation "com.android.support:appcompat-v7:$support_libs_version"
+    implementation "com.android.support:cardview-v7:$support_libs_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "com.android.databinding:compiler:$gradle_version"
 

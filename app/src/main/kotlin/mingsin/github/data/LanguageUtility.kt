@@ -15,7 +15,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class LanguageUtility @Inject constructor(val context: Context) {
-    private var colorConfig: ArrayMap<String, String>
+    var colorConfig: ArrayMap<String, String>
     private val gsonType = object : TypeToken<ArrayMap<String, String>>() {}.type
 
     init {
