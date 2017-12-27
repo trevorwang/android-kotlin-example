@@ -1,10 +1,10 @@
-package mingsin.androidkotlinexample.di
+package mingsin.github.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import mingsin.androidkotlinexample.ui.ExampleFragment
-import mingsin.androidkotlinexample.ui.MainActivity
-import mingsin.androidkotlinexample.ui.WithFragmentActivity
+import mingsin.github.ui.ExampleFragment
+import mingsin.github.ui.MainActivity
+import mingsin.github.ui.WithFragmentActivity
 
 /**
  * Created by wangta on 19/12/2017.

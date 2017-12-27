@@ -1,9 +1,9 @@
-package mingsin.androidkotlinexample.di
+package mingsin.github.di
 
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import mingsin.androidkotlinexample.App
+import mingsin.github.App
 import javax.inject.Singleton
 
 /**

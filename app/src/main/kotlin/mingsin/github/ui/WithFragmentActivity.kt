@@ -1,8 +1,8 @@
-package mingsin.androidkotlinexample.ui
+package mingsin.github.ui
 
 import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
-import mingsin.androidkotlinexample.R
+import mingsin.github.R
 
 /**
  * Created by Trevor Wang on 2/17/17.

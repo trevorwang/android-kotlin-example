@@ -1,7 +1,7 @@
-package mingsin.androidkotlinexample.viewmodel
+package mingsin.github.viewmodel
 
 import com.orhanobut.logger.Logger
-import mingsin.androidkotlinexample.ui.MainActivity
+import mingsin.github.ui.MainActivity
 import javax.inject.Inject
 
 /**

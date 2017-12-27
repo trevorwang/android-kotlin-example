@@ -1,4 +1,4 @@
-package mingsin.androidkotlinexample
+package mingsin.github
 
 import org.junit.Test
 

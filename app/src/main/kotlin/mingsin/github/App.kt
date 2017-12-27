@@ -1,12 +1,12 @@
-package mingsin.androidkotlinexample
+package mingsin.github
 
 import android.net.ConnectivityManager
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
-import mingsin.androidkotlinexample.di.AppModule
-import mingsin.androidkotlinexample.di.DaggerAppComponent
+import mingsin.github.di.AppModule
+import mingsin.github.di.DaggerAppComponent
 import javax.inject.Inject
 
 /**

@@ -1,12 +1,12 @@
-package mingsin.androidkotlinexample.di
+package mingsin.github.di
 
 import android.content.Context
 import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
-import mingsin.androidkotlinexample.App
-import mingsin.androidkotlinexample.data.ApiService
-import mingsin.androidkotlinexample.data.RestClient
+import mingsin.github.App
+import mingsin.github.data.GithubApiService
+import mingsin.github.data.RestApi
 import javax.inject.Singleton
 
 
@@ -36,7 +36,7 @@ class AppModule(val app: App) {
 
     @Provides
     @Singleton
-    fun api(): ApiService {
-        return RestClient().createApi()
+    fun provideGithubApiService(retrofit: RestApi): GithubApiService {
+        return retrofit.createRetrofit().create(GithubApiService::class.java)
     }
 }
