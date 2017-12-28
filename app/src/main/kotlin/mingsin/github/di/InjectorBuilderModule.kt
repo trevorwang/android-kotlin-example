@@ -2,8 +2,9 @@ package mingsin.github.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import mingsin.github.ui.ExampleFragment
+import mingsin.github.ui.BaseFragment
 import mingsin.github.ui.MainActivity
+import mingsin.github.ui.TrendingFragment
 import mingsin.github.ui.WithFragmentActivity
 
 /**
@@ -19,6 +20,9 @@ abstract class InjectorBuilderModule {
     abstract fun injectWithFragmentActivity(): WithFragmentActivity
 
     @ContributesAndroidInjector
-    abstract fun injectExampleFragment(): ExampleFragment
+    abstract fun injectBaseFragment(): BaseFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectTrendingFragmeng(): TrendingFragment
 
 }

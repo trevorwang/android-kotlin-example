@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/hello"
-        android:name="mingsin.github.ui.ExampleFragment"
+        android:name="mingsin.github.ui.TrendingFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

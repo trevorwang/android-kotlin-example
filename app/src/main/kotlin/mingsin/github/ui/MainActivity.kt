@@ -15,12 +15,9 @@ import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import mingsin.github.R
 import mingsin.github.databinding.ActivityMainBinding
-import mingsin.github.viewmodel.MainViewModel
 import javax.inject.Inject
 
-class MainActivity : DaggerAppCompatActivity(),  NavigationView.OnNavigationItemSelectedListener{
-    @Inject lateinit var cm: ConnectivityManager
-    @Inject lateinit var viewModel: MainViewModel
+class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawer: DrawerLayout
     private val fragmentList: SparseArray<BaseFragment> = SparseArray()
     private val subscriptions = CompositeDisposable()
@@ -38,13 +35,13 @@ class MainActivity : DaggerAppCompatActivity(),  NavigationView.OnNavigationItem
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
 
-        selectDrawerMenuItem(R.id.nav_dashboard)
+        selectDrawerMenuItem(R.id.nav_trending)
     }
 
 
     override fun onStop() {
         super.onStop()
-        subscriptions.clear()
+        subscriptions.dispose()
     }
 
     private fun switchTo(fragment: Fragment?) {
@@ -70,19 +67,19 @@ class MainActivity : DaggerAppCompatActivity(),  NavigationView.OnNavigationItem
 
     private fun selectDrawerMenuItem(itemId: Int) {
         var fragment = fragmentList.get(itemId)
-//        if (fragment == null) {
-//            when (itemId) {
+        if (fragment == null) {
+            when (itemId) {
 //                R.id.nav_dashboard -> {
 //                    fragment = DashboardFragment()
 //                }
-//                R.id.nav_trending -> {
-//                    fragment = TrendingFragment()
-//                }
+                R.id.nav_trending -> {
+                    fragment = TrendingFragment()
+                }
 //                R.id.nav_user -> {
 //                    fragment = UserFragment()
 //                }
-//            }
-//        }
+            }
+        }
         switchTo(fragment)
         fragmentList.put(itemId, fragment)
     }
