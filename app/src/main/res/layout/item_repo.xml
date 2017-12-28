@@ -12,6 +12,8 @@
         <variable
             name="lanUtility"
             type="mingsin.github.data.LanguageUtility" />
+
+
     </data>
 
     <android.support.v7.widget.CardView
@@ -59,7 +61,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/tv_star"
                 android:text="@{repo.language}"
-                android:textColor='@{lanUtility.colorConfig.get(repo.language)}'
+                android:textColor='@{lanUtility.getColor(repo.language)}'
                 tools:text="Java" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

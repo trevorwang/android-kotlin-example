@@ -1,6 +1,9 @@
 package mingsin.github.data
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.support.v4.util.ArrayMap
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -15,7 +18,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class LanguageUtility @Inject constructor(val context: Context) {
-    var colorConfig: ArrayMap<String, String>
+    private var colorConfig: ArrayMap<String, String>
     private val gsonType = object : TypeToken<ArrayMap<String, String>>() {}.type
 
     init {
@@ -23,5 +26,15 @@ class LanguageUtility @Inject constructor(val context: Context) {
         val cc = InputStreamReader(inputStream)
         colorConfig = Gson().fromJson<ArrayMap<String, String>>(cc, gsonType)
         Logger.d(colorConfig)
+    }
+
+    fun getColor(lan: String?): String? {
+        return colorConfig[lan]
+    }
+
+    fun getDrawable(lan: String?): Drawable? {
+        val color = colorConfig[lan]
+        Logger.v("Color %s", color)
+        return if (color == null) ColorDrawable(Color.TRANSPARENT) else ColorDrawable(Color.parseColor(color))
     }
 }

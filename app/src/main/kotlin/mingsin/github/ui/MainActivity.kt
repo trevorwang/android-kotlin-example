@@ -55,7 +55,9 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            if(supportFragmentManager.backStackEntryCount > 1) {
+                super.onBackPressed()
+            }
         }
     }
 
