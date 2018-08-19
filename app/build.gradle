@@ -60,7 +60,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     testImplementation 'junit:junit:4.12'
-    testImplementation "org.robolectric:robolectric:3.6"
+    testImplementation "org.robolectric:robolectric:4.0-alpha-3"
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support:support-annotations:' + support_libs_version
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
