@@ -1,0 +1,13 @@
+apply plugin: 'pmd'
+
+task pmd(type: Pmd) {
+    ruleSetFiles = rootProject.files("config/pmd/pmd-ruleset.xml")
+    ignoreFailures = false
+    ruleSets = []
+
+    source 'src/main'
+    include '**/*.java'
+    exclude '**/gen/**'
+}
+
+// check.dependsOn 'pmd'
