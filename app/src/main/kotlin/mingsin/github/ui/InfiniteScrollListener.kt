@@ -18,7 +18,7 @@ abstract class InfiniteScrollListener(pageSize: Int) : RecyclerView.OnScrollList
 
     }
 
-    override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val lm = recyclerView?.layoutManager
         var lastVisibleItemPosition = 0
         val totalItemCount = lm?.itemCount ?: 0

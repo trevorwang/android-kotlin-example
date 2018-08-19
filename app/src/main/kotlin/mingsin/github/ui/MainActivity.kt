@@ -1,6 +1,7 @@
 package mingsin.github.ui
 
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -10,11 +11,14 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.util.SparseArray
+import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import mingsin.github.R
 import mingsin.github.databinding.ActivityMainBinding
+import mingsin.github.databinding.NavHeaderMainBinding
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -26,15 +30,19 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        setSupportActionBar(binding.appBar.toolbar)
+        setSupportActionBar(binding.appBar?.toolbar)
 
         drawer = binding.drawerLayout
         val toggle = ActionBarDrawerToggle(
-                this, drawer, binding.appBar.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer, binding.appBar?.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
-
+        val navBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
+        navBinding.ivAvatar.setOnClickListener {
+            val intent = Intent(applicationContext,LoginActivity::class.java)
+            startActivity(intent)
+        }
         selectDrawerMenuItem(R.id.nav_trending)
     }
 
@@ -55,7 +63,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            if(supportFragmentManager.backStackEntryCount > 1) {
+            if (supportFragmentManager.backStackEntryCount > 1) {
                 super.onBackPressed()
             }
         }

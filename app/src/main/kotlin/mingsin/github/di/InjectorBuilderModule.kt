@@ -2,10 +2,7 @@ package mingsin.github.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import mingsin.github.ui.BaseFragment
-import mingsin.github.ui.MainActivity
-import mingsin.github.ui.TrendingFragment
-import mingsin.github.ui.WithFragmentActivity
+import mingsin.github.ui.*
 
 /**
  * Created by wangta on 19/12/2017.
@@ -24,5 +21,8 @@ abstract class InjectorBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun injectTrendingFragmeng(): TrendingFragment
+
+    @ContributesAndroidInjector
+    abstract fun injectLoginActivity(): LoginActivity
 
 }

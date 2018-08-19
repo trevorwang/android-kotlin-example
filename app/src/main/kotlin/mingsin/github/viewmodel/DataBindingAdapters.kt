@@ -7,7 +7,8 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.PicassoProvider
 
 /**
  * Created by trevorwang on 25/12/2016.
@@ -47,5 +48,5 @@ fun bindImageSrc(view: ImageView, src: String?) {
     if (src == null) {
         return
     }
-    Glide.with(view.context).load(src).into(view)
+    Picasso.get().load(src).into(view)
 }

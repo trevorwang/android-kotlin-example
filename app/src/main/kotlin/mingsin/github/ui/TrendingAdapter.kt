@@ -27,19 +27,19 @@ class TrendingAdapter(val context: Context, private val languageUtility: Languag
             }
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ItemHolder<ViewDataBinding> {
+    override fun onCreateViewHolder(p0: ViewGroup, viewType: Int): ItemHolder<ViewDataBinding> {
         val inflater = LayoutInflater.from(context)
         if (viewType == itemTypeFooter) {
-            val footerBinding = DataBindingUtil.inflate<RecyclerviewFooterBinding>(inflater, R.layout.recyclerview_footer, parent, false)
+            val footerBinding = DataBindingUtil.inflate<RecyclerviewFooterBinding>(inflater, R.layout.recyclerview_footer, p0, false)
             return ItemHolder(footerBinding)
         }
 
-        val binding = DataBindingUtil.inflate<ItemRepoBinding>(inflater, R.layout.item_repo, parent, false)
+        val binding = DataBindingUtil.inflate<ItemRepoBinding>(inflater, R.layout.item_repo, p0, false)
         return ItemHolder<ItemRepoBinding>(binding)
     }
 
 
-    override fun onBindViewHolder(holder: ItemHolder<ViewDataBinding>?, position: Int) {
+    override fun onBindViewHolder(holder: ItemHolder<ViewDataBinding>, position: Int) {
         val binding = holder?.binding
         when (binding) {
             is ItemRepoBinding -> {
