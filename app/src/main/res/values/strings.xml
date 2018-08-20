@@ -8,4 +8,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="trending">Trending</string>
     <string name="users">Users</string>
+
+
+    <string name="sdk_key" translatable="false">debug key value</string>
 </resources>
