@@ -1,14 +1,14 @@
 package mingsin.github.ui
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * Created by trevorwang on 21/12/2016.
  */
-abstract class InfiniteScrollListener(pageSize: Int) : RecyclerView.OnScrollListener() {
+abstract class InfiniteScrollListener(pageSize: Int) : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
     private var visibleThreshold = pageSize
     private var nextPage = 0
     private var previousTotalItemCount = 0
@@ -18,20 +18,20 @@ abstract class InfiniteScrollListener(pageSize: Int) : RecyclerView.OnScrollList
 
     }
 
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
         val lm = recyclerView.layoutManager
         var lastVisibleItemPosition = 0
         val totalItemCount = lm?.itemCount ?: 0
         when (lm) {
-            is LinearLayoutManager -> {
+            is androidx.recyclerview.widget.LinearLayoutManager -> {
                 lastVisibleItemPosition = lm.findLastVisibleItemPosition()
             }
 
-            is GridLayoutManager -> {
+            is androidx.recyclerview.widget.GridLayoutManager -> {
                 lastVisibleItemPosition = lm.findLastVisibleItemPosition()
             }
 
-            is StaggeredGridLayoutManager -> {
+            is androidx.recyclerview.widget.StaggeredGridLayoutManager -> {
                 val positions = lm.findLastVisibleItemPositions(IntArray(0))
                 lastVisibleItemPosition = getLastVisibleItem(positions)
             }

@@ -2,14 +2,14 @@ package mingsin.github.ui
 
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
+import com.google.android.material.navigation.NavigationView
+import androidx.fragment.app.Fragment
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -22,7 +22,7 @@ import mingsin.github.databinding.NavHeaderMainBinding
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var drawer: DrawerLayout
+    private lateinit var drawer: androidx.drawerlayout.widget.DrawerLayout
     private val fragmentList: SparseArray<BaseFragment> = SparseArray()
     private val subscriptions = CompositeDisposable()
 
@@ -52,7 +52,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         subscriptions.dispose()
     }
 
-    private fun switchTo(fragment: Fragment?) {
+    private fun switchTo(fragment: androidx.fragment.app.Fragment?) {
         if (fragment == null) {
             return
         }

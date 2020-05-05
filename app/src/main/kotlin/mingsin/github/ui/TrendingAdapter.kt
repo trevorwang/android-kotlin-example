@@ -2,10 +2,10 @@ package mingsin.github.ui;
 
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import mingsin.github.R
@@ -14,7 +14,7 @@ import mingsin.github.databinding.ItemRepoBinding
 import mingsin.github.databinding.RecyclerviewFooterBinding
 import mingsin.github.model.Repository
 
-class TrendingAdapter(val context: Context, private val languageUtility: LanguageUtility) : RecyclerView.Adapter<ItemHolder<ViewDataBinding>>() {
+class TrendingAdapter(val context: Context, private val languageUtility: LanguageUtility) : androidx.recyclerview.widget.RecyclerView.Adapter<ItemHolder<ViewDataBinding>>() {
     private val itemTypeFooter = 0x100
     var repos: List<Repository> = ArrayList()
         set(value) {

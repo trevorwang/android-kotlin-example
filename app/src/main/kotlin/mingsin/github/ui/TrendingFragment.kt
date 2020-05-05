@@ -1,8 +1,8 @@
 package mingsin.github.ui
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +27,7 @@ class TrendingFragment : BaseFragment() {
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trending, container, false)
         adapter = TrendingAdapter(context!!, lanUtil)
-        binding.rvRepos.layoutManager = LinearLayoutManager(context)
+        binding.rvRepos.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
         binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(10) {
             override fun loadMore(page: Int) {

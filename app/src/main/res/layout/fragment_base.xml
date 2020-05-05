@@ -10,12 +10,12 @@
             type="boolean" />
     </data>
 
-    <android.support.v7.widget.ContentFrameLayout
+    <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v4.widget.ContentLoadingProgressBar
+        <androidx.core.widget.ContentLoadingProgressBar
             android:id="@+id/progress"
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="60dp"
@@ -23,6 +23,6 @@
             android:layout_gravity="center"
             android:indeterminate="true"
             android:visibility='@{loading ? View.VISIBLE : View.INVISIBLE}' />
-    </android.support.v7.widget.ContentFrameLayout>
+    </FrameLayout>
 
 </layout>

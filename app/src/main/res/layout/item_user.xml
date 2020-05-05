@@ -10,7 +10,7 @@
             type="mingsin.github.model.User" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
@@ -46,5 +46,5 @@
                 android:text="@{user.htmlUrl}"
                 tools:text="https://github.com/trevorwang" />
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </layout>

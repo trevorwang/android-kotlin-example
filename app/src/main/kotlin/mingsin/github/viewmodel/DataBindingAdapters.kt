@@ -1,6 +1,6 @@
 package mingsin.github.viewmodel
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher

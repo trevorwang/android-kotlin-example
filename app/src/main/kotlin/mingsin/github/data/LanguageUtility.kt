@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.support.v4.util.ArrayMap
+import androidx.collection.ArrayMap
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.orhanobut.logger.Logger
@@ -24,7 +24,7 @@ class LanguageUtility @Inject constructor(val context: Context) {
     init {
         val inputStream = context.resources.openRawResource(R.raw.language_colors)
         val cc = InputStreamReader(inputStream)
-        colorConfig = Gson().fromJson<ArrayMap<String, String>>(cc, gsonType)
+        colorConfig = Gson().fromJson(cc,gsonType)
         Logger.d(colorConfig)
     }
 

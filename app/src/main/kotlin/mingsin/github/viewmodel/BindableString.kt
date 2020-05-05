@@ -1,7 +1,7 @@
 package mingsin.github.viewmodel
 
-import android.databinding.BaseObservable
-import android.databinding.BindingConversion
+import androidx.databinding.BaseObservable
+import androidx.databinding.BindingConversion
 
 /**
  * Created by trevorwang on 13/12/2016.
