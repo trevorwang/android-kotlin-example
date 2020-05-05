@@ -1,0 +1,23 @@
+apply plugin: 'findbugs'
+
+task findbugs(type: FindBugs) {
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = rootProject.file("config/findbugs/android-exclude-filter.xml")
+    classes = files("$project.buildDir/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+            // Only one of HTML or XML can be turned on at the same time
+            html.enabled = true
+            html.stylesheet resources.text.fromFile(rootProject.file('config/findbugs/color.xsl'))
+            xml.enabled = !html.enabled
+            xml.withMessages = true
+    }
+    classpath = files()
+    dependsOn "assembleDebug"
+}

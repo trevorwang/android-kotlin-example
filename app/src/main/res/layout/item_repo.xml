@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="repo"
+            type="mingsin.github.model.Repository" />
+
+        <variable
+            name="lanUtility"
+            type="mingsin.github.data.LanguageUtility" />
+
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="4dp"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="?attr/listPreferredItemPaddingLeft">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{repo.name}"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="?subtitleTextColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_name"
+                android:layout_marginBottom="4dp"
+                android:text="@{repo.description}" />
+
+            <TextView
+                android:id="@+id/tv_star"
+                style="?subtitleTextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_desc"
+                android:text="@{String.valueOf(repo.stargazersCount)}"
+                tools:text="300" />
+
+            <TextView
+                android:id="@+id/tv_lan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_star"
+                android:layout_marginStart="20dp"
+                android:layout_toEndOf="@+id/tv_star"
+                android:text="@{repo.language}"
+                android:textColor='@{lanUtility.getColor(repo.language)}'
+                tools:text="Java" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
