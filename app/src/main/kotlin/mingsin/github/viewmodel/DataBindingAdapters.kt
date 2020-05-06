@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.PicassoProvider
+import mingsin.github.R
 
 /**
  * Created by trevorwang on 25/12/2016.
@@ -48,5 +49,5 @@ fun bindImageSrc(view: ImageView, src: String?) {
     if (src == null) {
         return
     }
-    Picasso.get().load(src).into(view)
+    Picasso.get().load(src).placeholder(R.drawable.github).into(view)
 }
