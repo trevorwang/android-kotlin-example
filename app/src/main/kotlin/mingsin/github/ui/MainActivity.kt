@@ -2,27 +2,22 @@ package mingsin.github.ui
 
 
 import android.content.Intent
-import androidx.databinding.DataBindingUtil
-import android.net.ConnectivityManager
 import android.os.Bundle
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.ActionBarDrawerToggle
 import android.util.SparseArray
-import android.view.LayoutInflater
 import android.view.MenuItem
-import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.disposables.CompositeDisposable
 import mingsin.github.R
 import mingsin.github.databinding.ActivityMainBinding
 import mingsin.github.databinding.NavHeaderMainBinding
-import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    private lateinit var drawer: androidx.drawerlayout.widget.DrawerLayout
+    private lateinit var drawer: DrawerLayout
     private val fragmentList: SparseArray<BaseFragment> = SparseArray()
     private val subscriptions = CompositeDisposable()
 
@@ -30,11 +25,11 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        setSupportActionBar(binding.appBar?.toolbar)
+        setSupportActionBar(binding.appBar.toolbar)
 
         drawer = binding.drawerLayout
         val toggle = ActionBarDrawerToggle(
-                this, drawer, binding.appBar?.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, drawer, binding.appBar.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)

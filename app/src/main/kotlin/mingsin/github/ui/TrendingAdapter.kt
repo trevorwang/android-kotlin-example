@@ -14,7 +14,7 @@ import mingsin.github.databinding.ItemRepoBinding
 import mingsin.github.databinding.RecyclerviewFooterBinding
 import mingsin.github.model.Repository
 
-class TrendingAdapter(val context: Context, private val languageUtility: LanguageUtility) : androidx.recyclerview.widget.RecyclerView.Adapter<ItemHolder<ViewDataBinding>>() {
+class TrendingAdapter(val context: Context, private val languageUtility: LanguageUtility) : RecyclerView.Adapter<ItemHolder<ViewDataBinding>>() {
     private val itemTypeFooter = 0x100
     var repos: List<Repository> = ArrayList()
         set(value) {

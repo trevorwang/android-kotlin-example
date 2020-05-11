@@ -1,11 +1,11 @@
 package mingsin.github.ui
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -19,16 +19,30 @@ import javax.inject.Inject
  * Created by trevorwang on 17/12/2016.
  */
 class TrendingFragment : BaseFragment() {
-    @Inject lateinit var api: GithubApiService
-    @Inject lateinit var lanUtil: LanguageUtility
+    @Inject
+    lateinit var api: GithubApiService
+
+    @Inject
+    lateinit var lanUtil: LanguageUtility
     lateinit var adapter: TrendingAdapter
     private lateinit var binding: FragmentTrendingBinding
 
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trending, container, false)
         adapter = TrendingAdapter(context!!, lanUtil)
-        binding.rvRepos.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        binding.rvRepos.layoutManager = LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
+        binding.rvRepos.addItemDecoration(SimpleDividerDecoration())
+        binding.rvRepos.addItemDecoration(SectionDecoration(object : SectionDecorationCallback {
+            override fun groupId(position: Int): Int {
+                return position / 4
+            }
+
+            override fun groupFirstLine(position: Int): String {
+                return (position / 4 + 1).toString()
+            }
+
+        }))
         binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(10) {
             override fun loadMore(page: Int) {
                 Logger.v("loadMore.......page : %d", page)
