@@ -37,10 +37,11 @@ class SectionDecoration(val callback: SectionDecorationCallback) : RecyclerView.
 
         val left = parent.paddingLeft.toFloat()
         val right = parent.width.toFloat() - parent.paddingRight
-        val itemCount = parent.childCount
+        val childCount = parent.childCount
+        val itemCount = state.itemCount
         var preGroupId: Int
         var groupId = -1
-        for (i in 0 until itemCount) {
+        for (i in 0 until childCount) {
             val view = parent.getChildAt(i)
             val position = parent.getChildLayoutPosition(view)
             preGroupId = groupId
