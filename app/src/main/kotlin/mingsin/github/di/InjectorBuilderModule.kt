@@ -2,6 +2,7 @@ package mingsin.github.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import mingsin.github.tools.OkHttpGlideModule
 import mingsin.github.ui.*
 
 /**
@@ -20,9 +21,12 @@ abstract class InjectorBuilderModule {
     abstract fun injectBaseFragment(): BaseFragment
 
     @ContributesAndroidInjector
-    abstract fun injectTrendingFragmeng(): TrendingFragment
+    abstract fun injectTrendingFragment(): TrendingFragment
 
     @ContributesAndroidInjector
     abstract fun injectLoginActivity(): LoginActivity
+
+    @ContributesAndroidInjector
+    abstract fun injectGlideModule(): OkHttpGlideModule
 
 }

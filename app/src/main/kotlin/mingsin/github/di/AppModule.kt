@@ -7,6 +7,8 @@ import dagger.Provides
 import mingsin.github.App
 import mingsin.github.data.GithubApiService
 import mingsin.github.data.RestApi
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
 
 
@@ -36,7 +38,17 @@ class AppModule(val app: App) {
 
     @Provides
     @Singleton
-    fun provideGithubApiService(retrofit: RestApi): GithubApiService {
-        return retrofit.createRetrofit().create(GithubApiService::class.java)
+    fun provideOkHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGithubApiService(retrofit: RestApi, okHttpClient: OkHttpClient): GithubApiService {
+        return retrofit.createRetrofit(okHttpClient).create(GithubApiService::class.java)
     }
 }

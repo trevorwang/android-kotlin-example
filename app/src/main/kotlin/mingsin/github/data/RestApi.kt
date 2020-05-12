@@ -20,20 +20,12 @@ class RestApi @Inject constructor() {
     val clientSecret = "aadd49231fea44e5e1302cedcbfa757013b20516"
     val githubApi = "https://api.github.com/"
 
-    fun createRetrofit(): Retrofit {
+    fun createRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .client(okHttpClient())
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(createGson()))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .baseUrl(githubApi)
-                .build()
-    }
-
-    fun okHttpClient(): OkHttpClient {
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-        return OkHttpClient.Builder()
-                .addInterceptor(interceptor)
                 .build()
     }
 

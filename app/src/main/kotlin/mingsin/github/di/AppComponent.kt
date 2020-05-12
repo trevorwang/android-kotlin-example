@@ -4,6 +4,7 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import mingsin.github.App
+import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
 /**
@@ -14,5 +15,5 @@ import javax.inject.Singleton
         modules = [AndroidSupportInjectionModule::class, AppModule::class, InjectorBuilderModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
-
+    fun okHttpClient(): OkHttpClient
 }
