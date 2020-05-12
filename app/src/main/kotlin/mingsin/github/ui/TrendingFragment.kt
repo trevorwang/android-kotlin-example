@@ -14,6 +14,7 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.FixedPreloadSizeProvider
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -21,6 +22,7 @@ import mingsin.github.R
 import mingsin.github.data.GithubApiService
 import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
+import mingsin.github.extension.toast
 import mingsin.github.model.Repository
 import javax.inject.Inject
 
@@ -92,12 +94,19 @@ class TrendingFragment : BaseFragment() {
 
 
         binding.rvRepos.addOnItemTouchListener(RecyclerItemClickListener(binding.rvRepos.context,
+                binding.rvRepos,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClicked(view: View, position: Int) {
                         if (position < adapter.repos.size) {
                             openProjectPage(adapter.repos[position])
                         }
                     }
+                },
+                object : RecyclerItemClickListener.OnItemLongClickListener {
+                    override fun onItemLongClicked(view: View, position: Int) {
+                        context?.toast("hello world!")
+                    }
+
                 }))
 
         return binding.root

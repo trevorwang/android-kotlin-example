@@ -7,16 +7,41 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class RecyclerItemClickListener(val context: Context, private val onItemClickListener: OnItemClickListener) : RecyclerView.OnItemTouchListener {
+class RecyclerItemClickListener(val context: Context,
+                                val recyclerView: RecyclerView,
+                                private val onItemClickListener: OnItemClickListener? = null,
+                                private val onItemLongClickListener: OnItemLongClickListener? = null
+) : RecyclerView.OnItemTouchListener {
 
     interface OnItemClickListener {
         fun onItemClicked(view: View, position: Int)
     }
 
+    interface OnItemLongClickListener {
+        fun onItemLongClicked(view: View, position: Int)
+    }
+
     private val gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            return true
+            e?.let {
+                val childView = recyclerView.findChildViewUnder(e.x, e.y)
+                childView?.let {
+                    onItemClickListener?.onItemClicked(childView, recyclerView.getChildLayoutPosition(childView))
+                }
+                return true
+            }
+            return false
         }
+
+        override fun onLongPress(e: MotionEvent?) {
+            e?.let {
+                val childView = recyclerView.findChildViewUnder(e.x, e.y)
+                childView?.let {
+                    onItemLongClickListener?.onItemLongClicked(childView, recyclerView.getChildLayoutPosition(childView))
+                }
+            }
+        }
+
     })
 
 
@@ -24,10 +49,7 @@ class RecyclerItemClickListener(val context: Context, private val onItemClickLis
     }
 
     override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
-        val childView = rv.findChildViewUnder(e.x, e.y)
-        if (childView != null && gestureDetector.onTouchEvent(e)) {
-            onItemClickListener.onItemClicked(childView, rv.getChildLayoutPosition(childView))
-        }
+        gestureDetector.onTouchEvent(e)
         return false
     }
 
