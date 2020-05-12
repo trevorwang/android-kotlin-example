@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.bumptech.glide.Glide
+import com.bumptech.glide.ListPreloader.PreloadModelProvider
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
+import com.bumptech.glide.util.FixedPreloadSizeProvider
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -17,6 +19,7 @@ import mingsin.github.data.GithubApiService
 import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
 import javax.inject.Inject
+
 
 /**
  * Created by trevorwang on 17/12/2016.
@@ -52,15 +55,36 @@ class TrendingFragment : BaseFragment() {
                 loadData(page)
             }
         })
-        binding.rvRepos.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                if (newState == SCROLL_STATE_IDLE) {
-                    Glide.with(recyclerView).resumeRequests()
-                } else {
-                    Glide.with(recyclerView).pauseAllRequests()
+//        binding.rvRepos.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                if (newState == SCROLL_STATE_IDLE) {
+//                    Glide.with(recyclerView).resumeRequests()
+//                } else {
+//                    Glide.with(recyclerView).pauseAllRequests()
+//                }
+//            }
+//        })
+
+        val sizeProvider = FixedPreloadSizeProvider<String>(256, 256)
+
+        val modelLoader = object : PreloadModelProvider<String> {
+            override fun getPreloadItems(position: Int): List<String> {
+                if (position >= adapter.repos.size) {
+                    return listOf()
                 }
+                val url: String = adapter.repos[position].owner.avatarUrl
+                return if (url.isBlank()) {
+                    listOf()
+                } else listOf(url)
             }
-        })
+
+            override fun getPreloadRequestBuilder(item: String): RequestBuilder<*>? {
+                return Glide.with(this@TrendingFragment).load(item)
+            }
+        }
+
+        val preLoader = RecyclerViewPreloader(this, modelLoader, sizeProvider, 10)
+        binding.rvRepos.addOnScrollListener(preLoader)
 
         return binding.root
     }
