@@ -40,13 +40,12 @@ class TrendingAdapter(val context: Context, private val languageUtility: Languag
 
 
     override fun onBindViewHolder(holder: ItemHolder<ViewDataBinding>, position: Int) {
-        val binding = holder?.binding
-        when (binding) {
+        when (val binding = holder.binding) {
             is ItemRepoBinding -> {
                 val repo = repos[position]
                 binding.repo = repo
                 binding.lanUtility = languageUtility
-                binding.root.setOnClickListener { _ ->
+                binding.root.setOnClickListener {
                     openProjectPage(repo)
                 }
             }

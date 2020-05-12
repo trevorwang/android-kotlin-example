@@ -7,8 +7,7 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.PicassoProvider
+import com.bumptech.glide.Glide
 import mingsin.github.R
 
 /**
@@ -49,5 +48,5 @@ fun bindImageSrc(view: ImageView, src: String?) {
     if (src == null) {
         return
     }
-    Picasso.get().load(src).placeholder(R.drawable.github).tag("trending").into(view)
+    Glide.with(view).load(src).placeholder(R.drawable.github).into(view)
 }

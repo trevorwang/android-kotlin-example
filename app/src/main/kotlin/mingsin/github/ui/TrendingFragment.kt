@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
+import com.bumptech.glide.Glide
 import com.orhanobut.logger.Logger
-import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
 import mingsin.github.R
@@ -55,9 +55,9 @@ class TrendingFragment : BaseFragment() {
         binding.rvRepos.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (newState == SCROLL_STATE_IDLE) {
-                    Picasso.get().resumeTag("trending")
+                    Glide.with(recyclerView).resumeRequests()
                 } else {
-                    Picasso.get().pauseTag("trending")
+                    Glide.with(recyclerView).pauseAllRequests()
                 }
             }
         })
@@ -71,7 +71,7 @@ class TrendingFragment : BaseFragment() {
     }
 
     private fun loadData(page: Int = 1) {
-        subscriptions.add(api.trending("created:>2017-12-27", page = page).subscribeOn(io()).observeOn(AndroidSchedulers.mainThread())
+        subscriptions.add(api.trending("created:>2018-12-27", page = page).subscribeOn(io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Logger.v("get repos %s", it)
                     adapter.repos += it.items

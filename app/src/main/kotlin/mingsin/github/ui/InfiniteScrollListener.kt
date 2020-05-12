@@ -1,24 +1,17 @@
 package mingsin.github.ui
 
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
 /**
  * Created by trevorwang on 21/12/2016.
  */
-abstract class InfiniteScrollListener(pageSize: Int) : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+abstract class InfiniteScrollListener(pageSize: Int) : RecyclerView.OnScrollListener() {
     private var visibleThreshold = pageSize
     private var nextPage = 0
     private var previousTotalItemCount = 0
     private var loading = false
 
-    init {
-
-    }
-
-    override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         val lm = recyclerView.layoutManager
         var lastVisibleItemPosition = 0
         val totalItemCount = lm?.itemCount ?: 0
