@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.orhanobut.logger.Logger
+import com.squareup.picasso.Picasso
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
 import mingsin.github.R
@@ -28,11 +31,11 @@ class TrendingFragment : BaseFragment() {
     private lateinit var binding: FragmentTrendingBinding
 
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trending, container, false)
+        binding = inflate(inflater, R.layout.fragment_trending, container, false)
         adapter = TrendingAdapter(context!!, lanUtil)
         binding.rvRepos.layoutManager = LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
-        binding.rvRepos.addItemDecoration(SimpleDividerDecoration())
+//        binding.rvRepos.addItemDecoration(SimpleDividerDecoration())
         binding.rvRepos.addItemDecoration(SectionDecoration(object : SectionDecorationCallback {
             override fun groupId(position: Int): Int {
                 return position / 4
@@ -49,6 +52,16 @@ class TrendingFragment : BaseFragment() {
                 loadData(page)
             }
         })
+        binding.rvRepos.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == SCROLL_STATE_IDLE) {
+                    Picasso.get().resumeTag("trending")
+                } else {
+                    Picasso.get().pauseTag("trending")
+                }
+            }
+        })
+
         return binding.root
     }
 

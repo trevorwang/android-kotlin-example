@@ -34,7 +34,6 @@ class SectionDecoration(val callback: SectionDecorationCallback) : RecyclerView.
 
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-
         val left = parent.paddingLeft.toFloat()
         val right = parent.width.toFloat() - parent.paddingRight
         val childCount = parent.childCount

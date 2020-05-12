@@ -49,5 +49,5 @@ fun bindImageSrc(view: ImageView, src: String?) {
     if (src == null) {
         return
     }
-    Picasso.get().load(src).placeholder(R.drawable.github).into(view)
+    Picasso.get().load(src).placeholder(R.drawable.github).tag("trending").into(view)
 }
