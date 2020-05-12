@@ -45,9 +45,6 @@ class TrendingAdapter(val context: Context, private val languageUtility: Languag
                 val repo = repos[position]
                 binding.repo = repo
                 binding.lanUtility = languageUtility
-                binding.root.setOnClickListener {
-                    openProjectPage(repo)
-                }
             }
             is RecyclerviewFooterBinding -> {
 
@@ -62,11 +59,6 @@ class TrendingAdapter(val context: Context, private val languageUtility: Languag
         return super.getItemViewType(position)
     }
 
-    private fun openProjectPage(repo: Repository) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(repo.htmlUrl)
-        context.startActivity(intent)
-    }
 
     override fun getItemCount(): Int {
         if (repos.isEmpty()) {

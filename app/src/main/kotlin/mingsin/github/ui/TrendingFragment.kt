@@ -1,5 +1,7 @@
 package mingsin.github.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import com.bumptech.glide.ListPreloader.PreloadModelProvider
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.FixedPreloadSizeProvider
+import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.orhanobut.logger.Logger
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers.io
@@ -18,6 +21,7 @@ import mingsin.github.R
 import mingsin.github.data.GithubApiService
 import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
+import mingsin.github.model.Repository
 import javax.inject.Inject
 
 
@@ -65,7 +69,7 @@ class TrendingFragment : BaseFragment() {
 //            }
 //        })
 
-        val sizeProvider = FixedPreloadSizeProvider<String>(256, 256)
+        val sizeProvider = ViewPreloadSizeProvider<String>()
 
         val modelLoader = object : PreloadModelProvider<String> {
             override fun getPreloadItems(position: Int): List<String> {
@@ -86,7 +90,24 @@ class TrendingFragment : BaseFragment() {
         val preLoader = RecyclerViewPreloader(this, modelLoader, sizeProvider, 10)
         binding.rvRepos.addOnScrollListener(preLoader)
 
+
+        binding.rvRepos.addOnItemTouchListener(RecyclerItemClickListener(binding.rvRepos.context,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClicked(view: View, position: Int) {
+                        if (position < adapter.repos.size) {
+                            openProjectPage(adapter.repos[position])
+                        }
+                    }
+                }))
+
         return binding.root
+    }
+
+
+    private fun openProjectPage(repo: Repository) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(repo.htmlUrl)
+        context?.startActivity(intent)
     }
 
     override fun onResume() {
