@@ -6,6 +6,7 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.http.Body
 
 class RecyclerItemClickListener(val context: Context,
                                 val recyclerView: RecyclerView,
@@ -23,25 +24,18 @@ class RecyclerItemClickListener(val context: Context,
 
     private val gestureDetector = GestureDetector(context, object : SimpleOnGestureListener() {
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            e?.let {
-                val childView = recyclerView.findChildViewUnder(e.x, e.y)
-                childView?.let {
-                    onItemClickListener?.onItemClicked(childView, recyclerView.getChildLayoutPosition(childView))
-                }
+            findRecyclerViewItem(e, recyclerView) { view, position ->
+                onItemClickListener?.onItemClicked(view, position)
                 return true
             }
             return false
         }
 
         override fun onLongPress(e: MotionEvent?) {
-            e?.let {
-                val childView = recyclerView.findChildViewUnder(e.x, e.y)
-                childView?.let {
-                    onItemLongClickListener?.onItemLongClicked(childView, recyclerView.getChildLayoutPosition(childView))
-                }
+            findRecyclerViewItem(e, recyclerView) { view, position ->
+                onItemLongClickListener?.onItemLongClicked(view, position)
             }
         }
-
     })
 
 
@@ -54,5 +48,14 @@ class RecyclerItemClickListener(val context: Context,
     }
 
     override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+    }
+
+    inline fun findRecyclerViewItem(e: MotionEvent?, recyclerView: RecyclerView,
+                                    body: (view: View, position: Int) -> Unit) {
+        e?.let {
+            recyclerView.findChildViewUnder(e.x, e.y)?.let {
+                body(it, recyclerView.getChildLayoutPosition(it))
+            }
+        }
     }
 }
