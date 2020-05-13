@@ -111,8 +111,10 @@ class TrendingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.repos.observe(viewLifecycleOwner, Observer {
-            Logger.i("${it.size}")
-            adapter.repos = it
+            if (it != null) {
+                Logger.i("${it.size}")
+                adapter.repos = it
+            }
             hideLoadingView()
         })
     }
