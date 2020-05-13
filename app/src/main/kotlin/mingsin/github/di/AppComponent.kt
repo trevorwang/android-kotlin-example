@@ -12,7 +12,11 @@ import javax.inject.Singleton
  */
 @Singleton
 @Component(
-        modules = [AndroidSupportInjectionModule::class, AppModule::class, InjectorBuilderModule::class]
+        modules = [
+            AndroidSupportInjectionModule::class,
+            AppModule::class,
+            ViewModelModule::class,
+            InjectorBuilderModule::class]
 )
 interface AppComponent : AndroidInjector<App> {
     fun okHttpClient(): OkHttpClient

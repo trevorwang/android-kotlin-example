@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import dagger.android.support.DaggerAppCompatActivity
-import io.reactivex.disposables.CompositeDisposable
 import mingsin.github.R
 import mingsin.github.databinding.ActivityMainBinding
 import mingsin.github.databinding.NavHeaderMainBinding
@@ -19,7 +18,6 @@ import mingsin.github.databinding.NavHeaderMainBinding
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawer: DrawerLayout
     private val fragmentList: SparseArray<BaseFragment> = SparseArray()
-    private val subscriptions = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +33,7 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         binding.navView.setNavigationItemSelectedListener(this)
         val navBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
         navBinding.ivAvatar.setOnClickListener {
-            val intent = Intent(applicationContext,LoginActivity::class.java)
+            val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
         }
         selectDrawerMenuItem(R.id.nav_trending)
@@ -44,7 +42,6 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
 
     override fun onStop() {
         super.onStop()
-        subscriptions.dispose()
     }
 
     private fun switchTo(fragment: androidx.fragment.app.Fragment?) {
@@ -74,19 +71,19 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         var fragment = fragmentList.get(itemId)
         if (fragment == null) {
             when (itemId) {
-//                R.id.nav_dashboard -> {
-//                    fragment = DashboardFragment()
-//                }
+                R.id.nav_dashboard -> {
+                    fragment = TrendingFragment()
+                }
                 R.id.nav_trending -> {
                     fragment = TrendingFragment()
                 }
-//                R.id.nav_user -> {
-//                    fragment = UserFragment()
-//                }
+                R.id.nav_user -> {
+                    fragment = TrendingFragment()
+                }
             }
+            fragmentList.put(itemId, fragment)
         }
         switchTo(fragment)
-        fragmentList.put(itemId, fragment)
     }
 
 }

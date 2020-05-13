@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
-import io.reactivex.disposables.CompositeDisposable
 import mingsin.github.R
 import mingsin.github.databinding.FragmentBaseBinding
 
@@ -14,9 +13,8 @@ import mingsin.github.databinding.FragmentBaseBinding
  * Created by trevorwang on 27/12/2017.
  */
 abstract class BaseFragment : DaggerFragment() {
-    val subscriptions = CompositeDisposable()
     private lateinit var binding: FragmentBaseBinding
-    internal var inited = false
+    private var inited = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_base, container, false)
@@ -27,20 +25,17 @@ abstract class BaseFragment : DaggerFragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        subscriptions.dispose()
-    }
-
     override fun onResume() {
         super.onResume()
-        showLoadingView()
+        if (inited) {
+            showLoadingView()
+        }
     }
 
     abstract fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
 
     private fun showLoadingView() {
-        binding.loading = !inited
+        binding.loading = true
     }
 
     fun hideLoadingView() {

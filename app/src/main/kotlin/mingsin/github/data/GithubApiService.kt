@@ -1,6 +1,5 @@
 package mingsin.github.data
 
-import io.reactivex.Observable
 import mingsin.github.model.Contributor
 import mingsin.github.model.RepositoryResult
 import mingsin.github.model.User
@@ -16,20 +15,25 @@ import retrofit2.http.Query
 interface GithubApiService {
 
     @GET("repos/{owner}/{repo}/contributors")
-    fun contributors(
+    suspend fun contributors(
             @Path("owner") owner: String,
-            @Path("repo") repo: String): Observable<List<Contributor>>
+            @Path("repo") repo: String): List<Contributor>
 
     @GET("search/repositories")
-    fun trending(@Query("q") q: String,
-                 @Query("sorts") sorts: String = "star",
-                 @Query("order") order: String = " desc",
-                 @Query("page") page: Int = 1): Observable<RepositoryResult>
+    suspend fun trending(@Query("q") q: String,
+                         @Query("sorts") sorts: String = "star",
+                         @Query("order") order: String = " desc",
+                         @Query("page") page: Int = 1): RepositoryResult
 
+    @GET("search/repositories")
+    suspend fun trendingKotlin(@Query("q") q: String,
+                               @Query("sorts") sorts: String = "star",
+                               @Query("order") order: String = " desc",
+                               @Query("page") page: Int = 1): RepositoryResult
 
     @GET("users")
-    fun users(@Query("since") since:String = "0"): Observable<List<User>>
+    suspend fun users(@Query("since") since: String = "0"): List<User>
 
     @GET("users/{username}")
-    fun userDetail(@Path("username") username: String): Observable<UserDetail>
+    suspend fun userDetail(@Path("username") username: String): UserDetail
 }
