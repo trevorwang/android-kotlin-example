@@ -27,15 +27,14 @@ abstract class BaseFragment : DaggerFragment() {
 
     override fun onResume() {
         super.onResume()
-        if (inited) {
-            showLoadingView()
-        }
+        showLoadingView()
+        inited = true
     }
 
     abstract fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
 
     private fun showLoadingView() {
-        binding.loading = true
+        binding.loading = !inited
     }
 
     fun hideLoadingView() {

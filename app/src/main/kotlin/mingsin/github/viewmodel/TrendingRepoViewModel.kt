@@ -10,21 +10,20 @@ import javax.inject.Inject
 
 class TrendingRepoViewModel @Inject constructor(private val api: GithubApiService) : ViewModel() {
 
-    var repos: MutableLiveData<List<Repository>> = MutableLiveData(listOf())
+    var repos: MutableLiveData<List<Repository>> = MutableLiveData()
 
     private suspend fun loadRepos(page: Int = 0): List<Repository> {
         return api.trendingKotlin("created:>2018-12-27", page = page).items
     }
 
-    fun loadMore(page: Int = 0) {
+    fun loadData(page: Int = 0) {
         viewModelScope.launch {
             val data = loadRepos(page)
-            repos.value = repos.value!! + data
+            if (repos.value == null) {
+                repos.value = data
+            } else {
+                repos.value = repos.value!! + data
+            }
         }
     }
-
-    fun loadData() {
-        loadMore()
-    }
-
 }

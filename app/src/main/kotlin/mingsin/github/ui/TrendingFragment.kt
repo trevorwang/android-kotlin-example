@@ -49,28 +49,22 @@ class TrendingFragment : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             model.loadData()
         }
-
     }
 
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflate(inflater, R.layout.fragment_trending, container, false)
+        setupRecyclerViewData()
+        return binding.root
+    }
+
+    private fun setupRecyclerViewData() {
         adapter = TrendingAdapter(requireContext(), lanUtil)
         binding.rvRepos.layoutManager = LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
-        binding.rvRepos.addItemDecoration(SectionDecoration(object : SectionDecorationCallback {
-            override fun groupId(position: Int): Int {
-                return position / 4
-            }
-
-            override fun groupFirstLine(position: Int): String {
-                return (position / 4 + 1).toString()
-            }
-
-        }))
         binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(10) {
             override fun loadMore(page: Int) {
                 Logger.v("loadMore.......page : %d", page)
-                model.loadMore(page)
+                model.loadData(page)
             }
         })
         setupRecyclerViewPreLoader()
@@ -88,7 +82,6 @@ class TrendingFragment : BaseFragment() {
                         context?.toast("hello world!")
                     }
                 }))
-        return binding.root
     }
 
     private fun setupRecyclerViewPreLoader() {
@@ -118,6 +111,7 @@ class TrendingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.repos.observe(viewLifecycleOwner, Observer {
+            Logger.i("${it.size}")
             adapter.repos = it
             hideLoadingView()
         })
