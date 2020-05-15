@@ -117,6 +117,13 @@ class TrendingFragment : BaseFragment() {
             }
             hideLoadingView()
         })
+
+        model.error.observe(viewLifecycleOwner, Observer {
+            it?.let { th ->
+                requireContext().toast(th.message!!)
+            }
+
+        })
     }
 
 

@@ -1,27 +1,21 @@
 package mingsin.github.viewmodel
 
-import androidx.lifecycle.*
-import com.orhanobut.logger.Logger
-import kotlinx.coroutines.flow.asFlow
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mingsin.github.data.GithubApiService
 import mingsin.github.model.Repository
-import java.lang.Exception
 import javax.inject.Inject
 
 
-class TrendingRepoViewModel @Inject constructor(private val api: GithubApiService) : ViewModel() {
+class TrendingRepoViewModel @Inject constructor(private val api: GithubApiService) : BaseViewModel() {
 
     var repos: MutableLiveData<List<Repository>> = MutableLiveData()
 
     private suspend fun loadRepos(page: Int = 0): List<Repository>? {
-        try {
-            return api.trendingKotlin("created:>2018-12-27", page = page).items
-        } catch (e: Exception) {
-            Logger.e(e, e.message.toString())
-            Result.failure<List<Repository>>(e)
+        return handleExceptions {
+            api.trendingKotlin("created:>2018-12-27", page = page).items
         }
-        return null
     }
 
     fun loadData(page: Int = 0) {
