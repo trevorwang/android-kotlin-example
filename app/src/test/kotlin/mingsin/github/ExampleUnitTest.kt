@@ -4,14 +4,14 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.junit.runners.JUnit4
 
 /**
  * Example local unit test, which will execute on the development machine (host).
 
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(JUnit4::class)
 class ExampleUnitTest {
     @Test
     @Throws(Exception::class)
