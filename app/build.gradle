@@ -26,8 +26,8 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
 
     testOptions {
