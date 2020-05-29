@@ -1,7 +1,6 @@
 apply from: '../config/checkstyle.gradle'
 apply from: '../config/pmd.gradle'
-apply from: '../config/findbugs.gradle'
 
 
 // Just remove it if you want to disable any plugin
-check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+check.dependsOn 'checkstyle', 'pmd'
