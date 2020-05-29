@@ -24,7 +24,5 @@ jobs:
 
     - name: Gradle Android
       uses: Raul6469/android-gradle-action@2.0.0
-      with:
-        # The ./gradlew command arguments
-        script: 
-          ./gradlew build
+    - name: Build
+      run: ./gradlew build
