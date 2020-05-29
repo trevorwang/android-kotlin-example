@@ -9,7 +9,7 @@ interface Repository {
             State.loading<T>()
             State.success(call())
         } catch (e: Throwable) {
-            State.error(e)
+            State.error<T>(e)
         }
     }
 }
