@@ -13,8 +13,5 @@ android:
     - 'android-sdk-preview-.+'
     - 'google-gdk-license-.+'
 
-before_install:
-  - yes | sdkmanager --licenses
-
 script:
   - ./gradlew check
