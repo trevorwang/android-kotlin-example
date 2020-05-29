@@ -25,7 +25,6 @@ jobs:
     - name: Gradle Android
       uses: Raul6469/android-gradle-action@2.0.0
       with:
-        scripts:
-          - yes | sdkmanager --licenses
+        script: yes | sdkmanager --licenses
     - name: Build
       run: ./gradlew build
