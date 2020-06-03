@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import mingsin.github.model.State
-import mingsin.github.model.Success
 import mingsin.github.repo.GithubRepository
 import javax.inject.Inject
 
@@ -26,9 +25,9 @@ class TrendingRepoViewModel @Inject constructor(private val repo: GithubReposito
             request {
                 repo.trendingRepos(page)
             }.collect {
-                if (it is Success) {
+                if (it is State.Success) {
                     val data = repos.value
-                    if (data is Success) {
+                    if (data is State.Success) {
                         repos.postValue(State.success(data.data + it.data))
                     }
                 }

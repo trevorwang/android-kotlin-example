@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader.PreloadModelProvider
@@ -23,9 +22,8 @@ import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
 import mingsin.github.di.ViewModelFactory
 import mingsin.github.extension.toast
-import mingsin.github.model.Loading
 import mingsin.github.model.Repository
-import mingsin.github.model.Success
+import mingsin.github.model.State
 import mingsin.github.viewmodel.TrendingRepoViewModel
 import javax.inject.Inject
 
@@ -46,11 +44,6 @@ class TrendingFragment : BaseFragment() {
     lateinit var adapter: TrendingAdapter
     private lateinit var binding: FragmentTrendingBinding
 
-
-    init {
-        lifecycleScope.launchWhenCreated {
-        }
-    }
 
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflate(inflater, R.layout.fragment_trending, container, false)
@@ -114,15 +107,15 @@ class TrendingFragment : BaseFragment() {
         model.repos.observe(viewLifecycleOwner, Observer {
 
             when (it) {
-                is Success -> {
+                is State.Success -> {
                     adapter.repos = it.data
                     hideLoadingView()
                 }
-                is Loading -> {
+                is State.Loading -> {
                 }
-                is Error -> {
+                is State.Error -> {
                     hideLoadingView()
-                    requireContext().toast(it.message!!)
+                    requireContext().toast(it.error.message ?: "")
                 }
             }
         })

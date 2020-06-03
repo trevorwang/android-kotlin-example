@@ -12,10 +12,10 @@ sealed class State<T> {
 
         fun <T> loading(): State<T> = Loading()
     }
+
+    class Success<T>(val data: T) : State<T>()
+
+    class Error<T>(val error: Throwable) : State<T>()
+
+    class Loading<T> : State<T>()
 }
-
-class Success<T>(val data: T) : State<T>()
-
-class Error<T>(val error: Throwable) : State<T>()
-
-class Loading<T> : State<T>()
