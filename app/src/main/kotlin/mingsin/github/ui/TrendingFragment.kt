@@ -23,7 +23,9 @@ import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
 import mingsin.github.di.ViewModelFactory
 import mingsin.github.extension.toast
+import mingsin.github.model.Loading
 import mingsin.github.model.Repository
+import mingsin.github.model.Success
 import mingsin.github.viewmodel.TrendingRepoViewModel
 import javax.inject.Inject
 
@@ -47,7 +49,6 @@ class TrendingFragment : BaseFragment() {
 
     init {
         lifecycleScope.launchWhenCreated {
-            model.loadData()
         }
     }
 
@@ -111,18 +112,19 @@ class TrendingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.repos.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                Logger.i("${it.size}")
-                adapter.repos = it
-            }
-            hideLoadingView()
-        })
 
-        model.error.observe(viewLifecycleOwner, Observer {
-            it?.let { th ->
-                requireContext().toast(th.message!!)
+            when (it) {
+                is Success -> {
+                    adapter.repos = it.data
+                    hideLoadingView()
+                }
+                is Loading -> {
+                }
+                is Error -> {
+                    hideLoadingView()
+                    requireContext().toast(it.message!!)
+                }
             }
-
         })
     }
 

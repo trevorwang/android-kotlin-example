@@ -1,31 +1,36 @@
 package mingsin.github.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import mingsin.github.data.GithubApiService
-import mingsin.github.model.Repository
+import mingsin.github.model.State
+import mingsin.github.model.Success
+import mingsin.github.repo.GithubRepository
 import javax.inject.Inject
 
 
-class TrendingRepoViewModel @Inject constructor(private val api: GithubApiService) : BaseViewModel() {
+class TrendingRepoViewModel @Inject constructor(private val repo: GithubRepository) : BaseViewModel() {
 
-    var repos: MutableLiveData<List<Repository>> = MutableLiveData()
-
-    private suspend fun loadRepos(page: Int = 0): List<Repository>? {
-        return handleExceptions {
-            api.trendingKotlin("created:>2018-12-27", page = page).items
+    val repos = liveData {
+        request {
+            repo.trendingRepos(0)
+        }.collect {
+            emit(it)
         }
-    }
+    } as MutableLiveData
 
     fun loadData(page: Int = 0) {
         viewModelScope.launch {
-            val data = loadRepos(page)
-            if (repos.value == null) {
-                repos.value = data
-            } else {
-                data?.let {
-                    repos.value = repos.value!! + it
+            request {
+                repo.trendingRepos(page)
+            }.collect {
+                if (it is Success) {
+                    val data = repos.value
+                    if (data is Success) {
+                        repos.postValue(State.success(data.data + it.data))
+                    }
                 }
             }
         }
