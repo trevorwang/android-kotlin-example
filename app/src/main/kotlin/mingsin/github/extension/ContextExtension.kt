@@ -18,10 +18,3 @@ fun Context.toast(message: String) {
     toast(message, Toast.LENGTH_SHORT)
 }
 
-fun <T> Flow<T>.toState(): Flow<State<T>> = let { item ->
-    item.map { State.success(it) }
-            .onStart { State.loading<T>() }
-            .catch { e ->
-                State.error<T>(e)
-            }
-}
