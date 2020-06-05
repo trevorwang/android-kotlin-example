@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:text="@{viewModel.user.login}"
+            android:text="@{viewModel.user.name}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             tools:text="Android Studio" />
 
@@ -42,6 +42,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.user.blog}"
             tools:text="android.studio@android.com" />
 
     </LinearLayout>
