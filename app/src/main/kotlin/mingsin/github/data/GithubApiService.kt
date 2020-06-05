@@ -22,7 +22,8 @@ interface GithubApiService {
     suspend fun trending(@Query("q") q: String,
                          @Query("sorts") sorts: String = "star",
                          @Query("order") order: String = " desc",
-                         @Query("page") page: Int = 1): RepositoryResult
+                         @Query("page") page: Int = 1,
+                         @Query("per_page") perPage: Int = 30): RepositoryResult
 
     @GET("search/repositories")
     suspend fun trendingKotlin(@Query("q") q: String,
@@ -38,5 +39,11 @@ interface GithubApiService {
 
     @GET("user")
     suspend fun currentUser(): User
+
+    @GET("users/{username}/followers")
+    suspend fun followers(@Path("username") username: String): List<User>
+
+    @GET("user/followers")
+    suspend fun followers(): List<User>
 
 }

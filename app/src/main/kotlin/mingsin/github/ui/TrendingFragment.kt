@@ -17,7 +17,6 @@ import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.orhanobut.logger.Logger
 import mingsin.github.R
-import mingsin.github.data.GithubApiService
 import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
 import mingsin.github.di.ViewModelFactory
@@ -32,8 +31,6 @@ import javax.inject.Inject
  * Created by trevorwang on 17/12/2016.
  */
 class TrendingFragment : BaseFragment() {
-    @Inject
-    lateinit var api: GithubApiService
 
     @Inject
     lateinit var factory: ViewModelFactory
@@ -55,7 +52,7 @@ class TrendingFragment : BaseFragment() {
         adapter = TrendingAdapter(requireContext(), lanUtil)
         binding.rvRepos.layoutManager = LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
-        binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(10) {
+        binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(30) {
             override fun loadMore(page: Int) {
                 Logger.v("loadMore.......page : %d", page)
                 model.loadData(page)

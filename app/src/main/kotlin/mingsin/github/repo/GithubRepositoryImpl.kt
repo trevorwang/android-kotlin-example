@@ -12,10 +12,10 @@ import javax.inject.Inject
 
 
 class GithubRepositoryImpl @Inject constructor(private val api: GithubApiService) : GithubRepository {
-    override fun trendingRepos(page: Int): Flow<List<Repository>> {
+    override fun trendingRepos(page: Int, perPage: Int): Flow<List<Repository>> {
         return flow {
             val items = withContext(Dispatchers.IO) {
-                api.trending("created:>2018-12-27", page = page).items
+                api.trending("created:>2018-12-27", page = page, perPage = perPage).items
             }
             emit(items)
         }
@@ -27,6 +27,14 @@ class GithubRepositoryImpl @Inject constructor(private val api: GithubApiService
                 api.currentUser()
             }
             emit(user)
+        }
+    }
+
+    override fun followers(): Flow<List<User>> {
+        return flow {
+            emit(withContext(Dispatchers.IO) {
+                api.followers()
+            })
         }
     }
 

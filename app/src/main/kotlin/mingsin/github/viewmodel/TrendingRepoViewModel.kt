@@ -20,7 +20,7 @@ class TrendingRepoViewModel @Inject constructor(private val repo: GithubReposito
         }
     } as MutableLiveData
 
-    fun loadData(page: Int = 0) {
+    fun loadData(page: Int = 0, perPage: Int = 30) {
         viewModelScope.launch {
             request {
                 repo.trendingRepos(page)

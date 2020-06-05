@@ -29,4 +29,7 @@ abstract class InjectorBuilderModule {
     @ContributesAndroidInjector
     abstract fun injectGlideModule(): OkHttpGlideModule
 
+    @ContributesAndroidInjector
+    abstract fun injectUserListFragment(): UserListFragment
+
 }

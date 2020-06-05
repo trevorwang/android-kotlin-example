@@ -83,8 +83,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
                 R.id.nav_trending -> {
                     fragment = TrendingFragment()
                 }
-                R.id.nav_user -> {
-                    fragment = TrendingFragment()
+                R.id.nav_followers -> {
+                    fragment = UserListFragment()
                 }
             }
             fragmentList.put(itemId, fragment)

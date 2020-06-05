@@ -6,6 +6,7 @@ import dagger.Binds
 import dagger.Module;
 import dagger.multibindings.IntoMap
 import mingsin.github.viewmodel.DrawerViewModel
+import mingsin.github.viewmodel.FollowersViewModel
 import mingsin.github.viewmodel.LoginViewModel
 import mingsin.github.viewmodel.TrendingRepoViewModel
 
@@ -26,6 +27,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DrawerViewModel::class)
     abstract fun bindDrawerViewModel(viewModel: DrawerViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FollowersViewModel::class)
+    abstract fun bindFollowersViewModel(viewModel: FollowersViewModel): ViewModel
 
 
     @Binds

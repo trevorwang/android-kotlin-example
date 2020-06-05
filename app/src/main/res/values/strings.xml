@@ -9,4 +9,9 @@
     <string name="trending">Trending</string>
     <string name="users">Users</string>
     <string name="save">Save</string>
+    <string name="flowers">Flowers</string>
+    <string name="tools">Tools</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
 </resources>
