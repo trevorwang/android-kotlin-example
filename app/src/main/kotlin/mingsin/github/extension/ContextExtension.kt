@@ -2,8 +2,6 @@ package mingsin.github.extension
 
 import android.content.Context
 import android.widget.Toast
-import kotlinx.coroutines.flow.*
-import mingsin.github.model.State
 
 /**
  * Created by trevorwang on 19/12/2016.
