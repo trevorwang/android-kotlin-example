@@ -9,6 +9,7 @@ import dagger.Provides
 import mingsin.github.App
 import mingsin.github.data.GithubApiService
 import mingsin.github.data.RestApi
+import mingsin.github.repo.AuthenticationInterceptor
 import mingsin.github.repo.local.AppDataBase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -41,11 +42,12 @@ class AppModule(val app: App) {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(authIn: AuthenticationInterceptor): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.HEADERS
         return OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .addInterceptor(authIn)
                 .build()
     }
 
