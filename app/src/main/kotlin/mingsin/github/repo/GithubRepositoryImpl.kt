@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import mingsin.github.data.GithubApiService
 import mingsin.github.model.Repository
+import mingsin.github.model.User
+import mingsin.github.model.UserDetail
 import javax.inject.Inject
 
 
@@ -16,6 +18,15 @@ class GithubRepositoryImpl @Inject constructor(private val api: GithubApiService
                 api.trending("created:>2018-12-27", page = page).items
             }
             emit(items)
+        }
+    }
+
+    override fun currentUser(): Flow<User> {
+        return flow {
+            val user = withContext(Dispatchers.IO) {
+                api.currentUser()
+            }
+            emit(user)
         }
     }
 

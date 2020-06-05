@@ -8,7 +8,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-
 /**
  * Created by trevorwang on 08/12/2016.
  */
@@ -36,4 +35,8 @@ interface GithubApiService {
 
     @GET("users/{username}")
     suspend fun userDetail(@Path("username") username: String): UserDetail
+
+    @GET("user")
+    suspend fun currentUser(): User
+
 }

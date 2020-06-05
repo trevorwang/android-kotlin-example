@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import mingsin.github.R
 
 /**
@@ -49,4 +50,13 @@ fun bindImageSrc(view: ImageView, src: String?) {
         return
     }
     Glide.with(view).load(src).placeholder(R.drawable.github).into(view)
+}
+
+
+@BindingAdapter("android:circleImg")
+fun bindCircleImage(view: ImageView, src: String?) {
+    if (src == null) {
+        return
+    }
+    Glide.with(view).load(src).transform(CircleCrop()).placeholder(R.drawable.github).into(view)
 }
