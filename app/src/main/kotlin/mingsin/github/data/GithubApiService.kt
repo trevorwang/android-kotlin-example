@@ -34,7 +34,7 @@ interface GithubApiService {
     suspend fun users(@Query("since") since: String = "0"): List<User>
 
     @GET("users/{username}")
-    suspend fun userDetail(@Path("username") username: String): UserDetail
+    suspend fun userDetail(@Path("username") username: String): User
 
     @GET("user")
     suspend fun currentUser(): User
