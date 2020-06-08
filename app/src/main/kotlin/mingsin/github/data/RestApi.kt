@@ -14,7 +14,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class RestApi @Inject constructor() {
-    private val githubApi = "https://api.github.com/notfound/"
+    private val githubApi = "https://api.github.com/"
 
     fun createRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
