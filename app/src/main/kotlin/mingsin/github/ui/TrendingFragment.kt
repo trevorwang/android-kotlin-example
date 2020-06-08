@@ -15,6 +15,7 @@ import com.bumptech.glide.ListPreloader.PreloadModelProvider
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import mingsin.github.R
 import mingsin.github.data.LanguageUtility
@@ -112,7 +113,9 @@ class TrendingFragment : BaseFragment() {
                 }
                 is State.Error -> {
                     hideLoadingView()
-                    requireContext().toast(it.error.message ?: "")
+                    handleError(it.error) { appError ->
+                        Snackbar.make(view, appError.message ?: "hah...", Snackbar.LENGTH_SHORT).show()
+                    }
                 }
             }
         })

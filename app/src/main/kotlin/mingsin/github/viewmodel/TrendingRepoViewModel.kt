@@ -1,7 +1,7 @@
 package mingsin.github.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -12,13 +12,9 @@ import javax.inject.Inject
 
 class TrendingRepoViewModel @Inject constructor(private val repo: GithubRepository) : BaseViewModel() {
 
-    val repos = liveData {
-        request {
-            repo.trendingRepos(0)
-        }.collect {
-            emit(it)
-        }
-    } as MutableLiveData
+    val repos =
+            request { repo.trendingRepos() }.asLiveData() as MutableLiveData
+
 
     fun loadData(page: Int = 0, perPage: Int = 30) {
         viewModelScope.launch {
