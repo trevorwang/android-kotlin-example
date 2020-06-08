@@ -7,6 +7,8 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import mingsin.github.di.AppModule
 import mingsin.github.di.DaggerAppComponent
 import okhttp3.OkHttpClient
@@ -30,7 +32,6 @@ class App : DaggerApplication() {
 
     override fun onCreate() {
         super.onCreate()
-
         if (BuildConfig.DEBUG) {
             StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
                     .detectAll()
@@ -45,6 +46,5 @@ class App : DaggerApplication() {
         }
 
         Logger.addLogAdapter(AndroidLogAdapter())
-        Logger.d("connectivity manager : $cm")
     }
 }

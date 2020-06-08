@@ -9,21 +9,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader.PreloadModelProvider
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
+import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.Logger
 import mingsin.github.R
-import mingsin.github.data.GithubApiService
 import mingsin.github.data.LanguageUtility
 import mingsin.github.databinding.FragmentTrendingBinding
 import mingsin.github.di.ViewModelFactory
 import mingsin.github.extension.toast
 import mingsin.github.model.Repository
+import mingsin.github.model.State
 import mingsin.github.viewmodel.TrendingRepoViewModel
 import javax.inject.Inject
 
@@ -32,8 +32,6 @@ import javax.inject.Inject
  * Created by trevorwang on 17/12/2016.
  */
 class TrendingFragment : BaseFragment() {
-    @Inject
-    lateinit var api: GithubApiService
 
     @Inject
     lateinit var factory: ViewModelFactory
@@ -45,12 +43,6 @@ class TrendingFragment : BaseFragment() {
     private lateinit var binding: FragmentTrendingBinding
 
 
-    init {
-        lifecycleScope.launchWhenCreated {
-            model.loadData()
-        }
-    }
-
     override fun onCreateContentView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = inflate(inflater, R.layout.fragment_trending, container, false)
         setupRecyclerViewData()
@@ -61,7 +53,7 @@ class TrendingFragment : BaseFragment() {
         adapter = TrendingAdapter(requireContext(), lanUtil)
         binding.rvRepos.layoutManager = LinearLayoutManager(context)
         binding.rvRepos.adapter = adapter
-        binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(10) {
+        binding.rvRepos.addOnScrollListener(object : InfiniteScrollListener(30) {
             override fun loadMore(page: Int) {
                 Logger.v("loadMore.......page : %d", page)
                 model.loadData(page)
@@ -111,18 +103,21 @@ class TrendingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         model.repos.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                Logger.i("${it.size}")
-                adapter.repos = it
-            }
-            hideLoadingView()
-        })
 
-        model.error.observe(viewLifecycleOwner, Observer {
-            it?.let { th ->
-                requireContext().toast(th.message!!)
+            when (it) {
+                is State.Success -> {
+                    adapter.repos = it.data
+                    hideLoadingView()
+                }
+                is State.Loading -> {
+                }
+                is State.Error -> {
+                    hideLoadingView()
+                    handleError(it.error) { appError ->
+                        Snackbar.make(view, appError.message ?: "hah...", Snackbar.LENGTH_SHORT).show()
+                    }
+                }
             }
-
         })
     }
 

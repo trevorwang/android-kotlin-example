@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import mingsin.github.R
 import mingsin.github.databinding.FragmentBaseBinding
+import mingsin.github.extension.toast
+import mingsin.github.model.State
+import mingsin.github.tools.AppError
 
 /**
  * Created by trevorwang on 27/12/2017.
@@ -39,5 +42,12 @@ abstract class BaseFragment : DaggerFragment() {
 
     fun hideLoadingView() {
         binding.loading = false
+    }
+
+    fun handleError(error: AppError, customAction: ((error: AppError) -> Unit)? = null) {
+        customAction?.let {
+            return it.invoke(error)
+        }
+        requireContext().toast(error.message ?: "Unknown error!")
     }
 }

@@ -11,25 +11,25 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/trending" />
         <item
-            android:id="@+id/nav_user"
+            android:id="@+id/nav_followers"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/users" />
+            android:title="@string/flowers" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="@string/tools" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/send" />
         </menu>
     </item>
 

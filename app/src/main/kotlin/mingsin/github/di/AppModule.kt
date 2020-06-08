@@ -2,11 +2,15 @@ package mingsin.github.di
 
 import android.content.Context
 import android.net.ConnectivityManager
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import dagger.Module
 import dagger.Provides
 import mingsin.github.App
 import mingsin.github.data.GithubApiService
 import mingsin.github.data.RestApi
+import mingsin.github.repo.AuthenticationInterceptor
+import mingsin.github.repo.local.AppDataBase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
@@ -38,11 +42,12 @@ class AppModule(val app: App) {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(authIn: AuthenticationInterceptor): OkHttpClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.HEADERS
         return OkHttpClient.Builder()
                 .addInterceptor(interceptor)
+                .addInterceptor(authIn)
                 .build()
     }
 
@@ -50,5 +55,13 @@ class AppModule(val app: App) {
     @Singleton
     fun provideGithubApiService(retrofit: RestApi, okHttpClient: OkHttpClient): GithubApiService {
         return retrofit.createRetrofit(okHttpClient).create(GithubApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseInstance(context: Context): AppDataBase {
+        return Room.databaseBuilder(context, AppDataBase::class.java, "github.db")
+                .setJournalMode(RoomDatabase.JournalMode.WRITE_AHEAD_LOGGING)
+                .build()
     }
 }

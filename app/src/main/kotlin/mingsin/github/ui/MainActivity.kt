@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -14,10 +15,17 @@ import dagger.android.support.DaggerAppCompatActivity
 import mingsin.github.R
 import mingsin.github.databinding.ActivityMainBinding
 import mingsin.github.databinding.NavHeaderMainBinding
+import mingsin.github.di.ViewModelFactory
+import mingsin.github.viewmodel.DrawerViewModel
+import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawer: DrawerLayout
     private val fragmentList: SparseArray<BaseFragment> = SparseArray()
+
+    @Inject
+    lateinit var factory: ViewModelFactory
+    val viewModel by viewModels<DrawerViewModel> { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         toggle.syncState()
         binding.navView.setNavigationItemSelectedListener(this)
         val navBinding = NavHeaderMainBinding.bind(binding.navView.getHeaderView(0))
+        navBinding.lifecycleOwner = this
+        navBinding.viewModel = viewModel
         navBinding.ivAvatar.setOnClickListener {
             val intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
@@ -39,10 +49,6 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
         selectDrawerMenuItem(R.id.nav_trending)
     }
 
-
-    override fun onStop() {
-        super.onStop()
-    }
 
     private fun switchTo(fragment: androidx.fragment.app.Fragment?) {
         if (fragment == null) {
@@ -77,8 +83,8 @@ class MainActivity : DaggerAppCompatActivity(), NavigationView.OnNavigationItemS
                 R.id.nav_trending -> {
                     fragment = TrendingFragment()
                 }
-                R.id.nav_user -> {
-                    fragment = TrendingFragment()
+                R.id.nav_followers -> {
+                    fragment = UserListFragment()
                 }
             }
             fragmentList.put(itemId, fragment)

@@ -5,7 +5,7 @@ import java.util.*
 /**
  * Created by trevorwang on 25/12/2016.
  */
-data class UserDetail(var user: User,
+data class UserDetail(
                       var name: String,
                       var company: String,
                       var blog: String,

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.LoginActivity" />
         <activity android:name="mingsin.github.ui.WithFragmentActivity" />
     </application>
 

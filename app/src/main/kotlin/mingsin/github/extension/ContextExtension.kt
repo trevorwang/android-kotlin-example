@@ -15,3 +15,4 @@ fun Context.toast(message: String, time: Int) {
 fun Context.toast(message: String) {
     toast(message, Toast.LENGTH_SHORT)
 }
+
